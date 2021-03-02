@@ -6,5 +6,13 @@ add_definitions("-std=c++11")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_executable(main main.cpp)
+set(INC_DIR ../include/)
+
+
+set(SRC ${SRC} 
+../src/window.cpp
+main.cpp)
+
+add_executable(main ${SRC})
 target_link_libraries(main ${CONAN_LIBS})
+target_include_directories(main PRIVATE ${INC_DIR})
