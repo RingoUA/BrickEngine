@@ -1,5 +1,5 @@
 [requires]
-glfw/3.3.3
+BrickEngine/0.1@
 
 [generators]
 cmake

@@ -1,0 +1,3 @@
+cd ..
+conan create .
+pause
