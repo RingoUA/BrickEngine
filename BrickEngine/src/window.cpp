@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include "Window.hpp"
 
 constexpr float normalize(const float& n) {
     return n/255.f;
@@ -6,7 +6,17 @@ constexpr float normalize(const float& n) {
 
 namespace Brick {
 
-Window::Window()
+class Window::WindowImpl {
+public:
+    WindowImpl() = default;
+    ~WindowImpl() = default;
+    WindowImpl(const WindowImpl&) = delete;
+    WindowImpl& operator=(WindowImpl&) = delete;
+    WindowImpl(WindowImpl&&) = default;
+    WindowImpl& operator=(WindowImpl&&) = default;
+};
+
+Window::Window() : pImpl{std::make_unique<WindowImpl>()}
 {
     if (glfwInit()) {
         window = glfwCreateWindow(640, 480, "window", NULL, NULL);
