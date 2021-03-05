@@ -1,21 +1,22 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include <GLFW/glfw3.h>
-
 #include <memory>
 
 namespace Brick {
 
+class WindowImpl;
 class Window {
 public:
     Window();
     ~Window();
+    Window(const Window&) = delete;
+    Window& operator=(Window&) = delete;
+    Window(Window&&);
+    Window& operator=(Window&&);
 
     void show();
 private:
-    GLFWwindow* window;
-    class WindowImpl;
     std::unique_ptr<WindowImpl> pImpl;
 };
 
