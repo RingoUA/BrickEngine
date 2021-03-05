@@ -7,7 +7,8 @@ constexpr float normalize(const float& n) {
 
 namespace Brick {
 
-WindowImpl::WindowImpl() {
+WindowImpl::WindowImpl() : data{}
+{
     if (glfwInit()) {
         window = glfwCreateWindow(640, 480, "window", NULL, NULL);
         if (!window)
@@ -24,7 +25,31 @@ WindowImpl::~WindowImpl() {
     glfwTerminate();
 }
 
-void WindowImpl::show(){
+int32_t WindowImpl::getWidth() const {
+    // TODO: replace get data to event system
+    glfwGetWindowSize(window, &data.width, &data.height);
+    return data.width;
+}
+
+int32_t WindowImpl::getHeight() const {
+    // TODO: replace get data to event system
+    glfwGetWindowSize(window, &data.width, &data.height);
+    return data.height;
+}
+
+int32_t WindowImpl::getXPosition() const {
+    // TODO: replace get data to event system
+    glfwGetWindowPos(window, &data.x_pos, &data.y_pos);
+    return data.x_pos;
+}
+
+int32_t WindowImpl::getYPosition() const {
+    // TODO: replace get data to event system
+    glfwGetWindowPos(window, &data.x_pos, &data.y_pos);
+    return data.y_pos;
+}
+
+void WindowImpl::show() {
     glClearColor(normalize(27), normalize(38), normalize(44), normalize(255));
     while (!glfwWindowShouldClose(window))
     {

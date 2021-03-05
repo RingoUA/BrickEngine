@@ -15,6 +15,11 @@ public:
     Window(Window&&);
     Window& operator=(Window&&);
 
+    int32_t getWidth() const;
+    int32_t getHeight() const;
+    int32_t getXPosition() const;
+    int32_t getYPosition() const;
+
     void show();
 private:
     std::unique_ptr<WindowImpl> pImpl;
