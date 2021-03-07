@@ -99,6 +99,8 @@ void WindowImpl::initCallback() {
     });
  	glfwSetDropCallback (window, [] (GLFWwindow* window, int path_count, const char* paths[]) {
     });
+    glfwSetJoystickCallback([](int jid, int event) {
+    });
 }
 
 }
