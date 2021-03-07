@@ -5,13 +5,6 @@
 
 namespace Brick {
 
-struct WindowData{
-    int32_t width;
-    int32_t height;
-    int32_t x_pos;
-    int32_t y_pos;
-};
-
 class WindowImpl {
 public:
     WindowImpl();
@@ -28,9 +21,14 @@ public:
 
     void show();
 private:
+    void initCallback();
+
+private:
     GLFWwindow* window;
-    // TODO: replace set data to this struct with event system
-    mutable WindowData data;
+    int32_t width;
+    int32_t height;
+    int32_t x_pos;
+    int32_t y_pos;
 };
 
 }
