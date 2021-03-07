@@ -82,6 +82,23 @@ void WindowImpl::initCallback() {
     });
     glfwSetWindowContentScaleCallback(window, [](GLFWwindow* window, float xscale, float yscale) {
     });
+    // input callback
+    glfwSetKeyCallback (window, [] (GLFWwindow* window, int key, int scancode, int action, int mods) {
+    });
+ 	glfwSetCharCallback (window, [] (GLFWwindow* window, unsigned int codepoint) {
+    });
+ 	glfwSetCharModsCallback (window, [] (GLFWwindow* window, unsigned int codepoint, int mods) {
+    });
+ 	glfwSetMouseButtonCallback (window, [] (GLFWwindow* window, int button, int action, int mods) {
+    });
+ 	glfwSetCursorPosCallback (window, [] (GLFWwindow* window, double xpos, double ypos) {
+    });
+ 	glfwSetCursorEnterCallback (window, [] (GLFWwindow* window, int entered) {
+    });
+ 	glfwSetScrollCallback (window, [] (GLFWwindow* window, double xoffset, double yoffset) {
+    });
+ 	glfwSetDropCallback (window, [] (GLFWwindow* window, int path_count, const char* paths[]) {
+    });
 }
 
 }
