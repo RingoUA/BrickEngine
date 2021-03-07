@@ -7,16 +7,23 @@ constexpr float normalize(const float& n) {
 
 namespace Brick {
 
+int32_t WindowImpl::window_counter = 0;
+
 WindowImpl::WindowImpl()
 {
     glfwSetErrorCallback([](int error_code, const char* description) {
 
     });
-    if (glfwInit()) {
+    static bool success = false;
+    if (!window_counter) {
+        success = glfwInit();
+    }
+    if (success) {
         window = glfwCreateWindow(640, 480, "window", NULL, NULL);
-        if (!window)
-        {
+        if (!window) {
             glfwTerminate();
+        } else {
+            ++window_counter;
         }
         glfwMakeContextCurrent(window);
         glfwSetWindowUserPointer(window, this);
@@ -27,7 +34,12 @@ WindowImpl::WindowImpl()
 }
 
 WindowImpl::~WindowImpl() {
-    glfwTerminate();
+    --window_counter;
+    if (window_counter) {
+        glfwDestroyWindow(window);
+    } else {
+        glfwTerminate();
+    }
 }
 
 int32_t WindowImpl::getWidth() const {

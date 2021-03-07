@@ -29,6 +29,8 @@ private:
     int32_t height;
     int32_t x_pos;
     int32_t y_pos;
+
+    static int32_t window_counter;
 };
 
 }
