@@ -1,37 +1,54 @@
-#include <GLFW/glfw3.h>
+#include "Window.hpp"
+#include "Log.hpp"
 
 int main(void)
 {
-    GLFWwindow* window;
+    Brick::Log::init();
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
+    Brick::Log::Info("Default log level --------------------------------------------------");
+    Brick::Log::Trace("Trace log!!!");
+    Brick::Log::Debug("Debug log!!!");
+    Brick::Log::Info("Info log!!!");
+    Brick::Log::Warn("Warn log!!!");
+    Brick::Log::Error("Error log!!!");
+    Brick::Log::Critical("Critical log!!!");
+    Brick::Log::Info("Set log level to debug --------------------------------------------------");
+    Brick::Log::SetLevel(Brick::Log::Level::debug);
+    Brick::Log::Trace("Trace log!!!");
+    Brick::Log::Debug("Debug log!!!");
+    Brick::Log::Info("Info log!!!");
+    Brick::Log::Warn("Warn log!!!");
+    Brick::Log::Error("Error log!!!");
+    Brick::Log::Critical("Critical log!!!");
+    Brick::Log::Info("Set log level to trace --------------------------------------------------");
+    Brick::Log::SetLevel(Brick::Log::Level::trace);
+    Brick::Log::Trace("Trace log!!!");
+    Brick::Log::Debug("Debug log!!!");
+    Brick::Log::Info("Info log!!!");
+    Brick::Log::Warn("Warn log!!!");
+    Brick::Log::Error("Error log!!!");
+    Brick::Log::Critical("Critical log!!!");
+    Brick::Log::Info("Set log level to warn --------------------------------------------------");
+    Brick::Log::SetLevel(Brick::Log::Level::warn);
+    Brick::Log::Trace("Trace log!!!");
+    Brick::Log::Debug("Debug log!!!");
+    Brick::Log::Info("Info log!!!");
+    Brick::Log::Warn("Warn log!!!");
+    Brick::Log::Error("Error log!!!");
+    Brick::Log::Critical("Critical log!!!");
+    Brick::Log::Critical("Set log level to off --------------------------------------------------");
+    Brick::Log::SetLevel(Brick::Log::Level::off);
+    Brick::Log::Trace("Trace log!!!");
+    Brick::Log::Debug("Debug log!!!");
+    Brick::Log::Info("Info log!!!");
+    Brick::Log::Warn("Warn log!!!");
+    Brick::Log::Error("Error log!!!");
+    Brick::Log::Critical("Critical log!!!");
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
+    Brick::Window w;
+    w.show();
     return 0;
 }
