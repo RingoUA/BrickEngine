@@ -46,7 +46,7 @@ int main(void)
     Brick::Log::Error("Error log!!!");
     Brick::Log::Critical("Critical log!!!");
 
-
+    Brick::Log::SetLevel(Brick::Log::Level::info);
 
     Brick::Window w;
     w.show();
