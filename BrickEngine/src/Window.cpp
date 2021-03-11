@@ -1,36 +1,12 @@
 #include "Window.hpp"
-
-#include "WindowImpl.hpp"
+#include "WindowOpenGL.hpp"
+#include "Log.hpp"
 
 namespace Brick {
 
-Window::Window() : pImpl{std::make_unique<WindowImpl>()}
-{
-}
-
-Window::~Window() = default;
-Window::Window(Window&&) = default;
-Window& Window::operator=(Window&&) = default;
-
-int32_t Window::getWidth() const {
-    return pImpl->getWidth();
-}
-
-int32_t Window::getHeight() const {
-    return pImpl->getHeight();
-}
-
-int32_t Window::getXPosition() const {
-    return pImpl->getXPosition();
-}
-
-int32_t Window::getYPosition() const {
-    return pImpl->getYPosition();
-}
-
-void Window::show()
-{
-    pImpl->show();
+std::unique_ptr<Window> Window::Create(std::string title, int32_t width, int32_t height) {
+    Log::Info("Create Window");
+    return std::make_unique<WindowOpenGL>(title, width, height);
 }
 
 } // Brick

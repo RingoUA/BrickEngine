@@ -1,4 +1,4 @@
-#include "WindowImpl.hpp"
+#include "WindowOpenGL.hpp"
 
 #include "Log.hpp"
 
@@ -9,9 +9,11 @@ constexpr float normalize(const float& n) {
 
 namespace Brick {
 
-int32_t WindowImpl::window_counter = 0;
+int32_t WindowOpenGL::window_counter = 0;
 
-WindowImpl::WindowImpl()
+WindowOpenGL::WindowOpenGL(std::string title, int32_t width, int32_t height)
+    : width{width}
+    , height{height}
 {
     glfwSetErrorCallback([](int error_code, const char* description) {
         Log::Error("error_code = {0}, description: {1}", error_code, description);
@@ -21,13 +23,12 @@ WindowImpl::WindowImpl()
         success = glfwInit();
     }
     if (success) {
-        window = glfwCreateWindow(640, 480, "window", NULL, NULL);
+        window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
         if (!window) {
             glfwTerminate();
         } else {
             ++window_counter;
         }
-        glfwMakeContextCurrent(window);
         glfwSetWindowUserPointer(window, this);
         initCallback();
     } else {
@@ -35,7 +36,7 @@ WindowImpl::WindowImpl()
     }
 }
 
-WindowImpl::~WindowImpl() {
+WindowOpenGL::~WindowOpenGL() {
     --window_counter;
     if (window_counter) {
         glfwDestroyWindow(window);
@@ -44,23 +45,24 @@ WindowImpl::~WindowImpl() {
     }
 }
 
-int32_t WindowImpl::getWidth() const {
+int32_t WindowOpenGL::getWidth() const noexcept {
     return width;
 }
 
-int32_t WindowImpl::getHeight() const {
+int32_t WindowOpenGL::getHeight() const noexcept {
     return height;
 }
 
-int32_t WindowImpl::getXPosition() const {
+int32_t WindowOpenGL::getXPosition() const noexcept {
     return x_pos;
 }
 
-int32_t WindowImpl::getYPosition() const {
+int32_t WindowOpenGL::getYPosition() const noexcept {
     return y_pos;
 }
 
-void WindowImpl::show() {
+void WindowOpenGL::show() {
+    glfwMakeContextCurrent(window);
     glClearColor(normalize(27), normalize(38), normalize(44), normalize(255));
     while (!glfwWindowShouldClose(window))
     {
@@ -70,17 +72,17 @@ void WindowImpl::show() {
     }
 }
 
-void WindowImpl::initCallback() {
+void WindowOpenGL::initCallback() {
     // window callcack
     glfwSetWindowPosCallback(window, [](GLFWwindow* window, int xpos, int ypos) {
-        WindowImpl& _window = *reinterpret_cast<WindowImpl*>(glfwGetWindowUserPointer(window));
+        WindowOpenGL& _window = *reinterpret_cast<WindowOpenGL*>(glfwGetWindowUserPointer(window));
         _window.x_pos = xpos;
         _window.y_pos = ypos;
 
         Log::Trace("WindowPos: x = {0}, y = {1}", xpos, ypos);
     });
     glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
-        WindowImpl& _window = *reinterpret_cast<WindowImpl*>(glfwGetWindowUserPointer(window));
+        WindowOpenGL& _window = *reinterpret_cast<WindowOpenGL*>(glfwGetWindowUserPointer(window));
         _window.width = width;
         _window.height = height;
 

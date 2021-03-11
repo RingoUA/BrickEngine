@@ -12,7 +12,7 @@ set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/)
 set(PRIVATE_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/inc/)
 
 set(SRC src/Window.cpp
-        src/WindowImpl.cpp
+        src/WindowOpenGL.cpp
         src/Log.cpp
 )
 

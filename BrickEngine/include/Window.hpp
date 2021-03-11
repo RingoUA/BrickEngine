@@ -2,27 +2,29 @@
 #define WINDOW_HPP
 
 #include <memory>
+#include <string>
+#include <functional>
 
 namespace Brick {
 
-class WindowImpl;
 class Window {
-public:
-    Window();
-    ~Window();
     Window(const Window&) = delete;
     Window& operator=(Window&) = delete;
-    Window(Window&&);
-    Window& operator=(Window&&);
+    Window(Window&&) = delete;
+    Window& operator=(Window&&) = delete;
+public:
+    virtual ~Window() = default;
 
-    int32_t getWidth() const;
-    int32_t getHeight() const;
-    int32_t getXPosition() const;
-    int32_t getYPosition() const;
+    virtual int32_t getWidth() const noexcept = 0;
+    virtual int32_t getHeight() const noexcept = 0;
+    virtual int32_t getXPosition() const noexcept = 0;
+    virtual int32_t getYPosition() const noexcept = 0;
 
-    void show();
-private:
-    std::unique_ptr<WindowImpl> pImpl;
+    virtual void show() = 0;
+
+    static std::unique_ptr<Window> Create(std::string title = "Brick", int32_t width = 1024, int32_t height = 768);
+protected:
+    Window() = default;
 };
 
 } // Brick
