@@ -22,6 +22,9 @@ public:
 
     virtual void show() = 0;
 
+    using TickFunc = std::function<void(void)>;
+    virtual void setTickFunc(TickFunc) = 0;
+
     static std::unique_ptr<Window> Create(std::string title = "Brick", int32_t width = 1024, int32_t height = 768);
 protected:
     Window() = default;

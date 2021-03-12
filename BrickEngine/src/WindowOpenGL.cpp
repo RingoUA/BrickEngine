@@ -67,9 +67,14 @@ void WindowOpenGL::show() {
     while (!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
         glfwPollEvents();
+        tickFunction();
+        glfwSwapBuffers(window);
     }
+}
+
+void WindowOpenGL::setTickFunc(Window::TickFunc tick_func) {
+    tickFunction = tick_func;
 }
 
 void WindowOpenGL::initCallback() {

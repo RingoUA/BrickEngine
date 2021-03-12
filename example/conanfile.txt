@@ -1,5 +1,6 @@
 [requires]
 BrickEngine/0.1@
+glad/0.1.34@
 
 [generators]
 cmake
